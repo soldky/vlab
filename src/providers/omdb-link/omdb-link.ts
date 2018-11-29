@@ -10,8 +10,17 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class OmdbLinkProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello OmdbLinkProvider Provider');
-  }
+  // CONSTANTES
+  private readonly KEY: string = "75522b56";
+  private readonly ID: string = "tt3896198";
+  private readonly URL_KEY: string = "?apikey=" + this.KEY + "&i=" + this.ID;
+
+  private readonly URL_OMDB: string = "http://www.omdbapi.com" + this.URL_KEY;
+
+  constructor(public http: HttpClient) {}
+
+  public getFilms(title: string, year: string, page: number) {
+    return this.http.get(this.URL_OMDB + "&s=" + title + "&y=" + year + "&page=" + page.toString()).toPromise();
+  };
 
 }
