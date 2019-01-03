@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 
 /**
  * Generated class for the FilmDetailsPage page.
@@ -19,11 +20,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FilmDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  protected movie = null;
+  protected genres: string[];
 
-  ionViewWillUnload() {
-    console.log('ionViewDidLoad FilmDetailsPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
+    this.movie = this.navParams.get('movie');
+    console.log(this.movie);
   }
 
 }

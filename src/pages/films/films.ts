@@ -16,9 +16,23 @@ export class FilmsPage extends Medias {
     super(apiOmdb);
   }
 
-  public filmsDetails(title: string) {
-    this.navCtrl.push('film-details', {
-      'title': title
+  public filmsDetails(movie) {
+    new Promise((resolve) => {
+      this.apiOmdb.getMediasDetailToAPI(movie.imdbID).then(data => {
+        console.log(data);
+        if(data) {
+          resolve(data);
+        }
+      });
+    }).then(
+    (movie) => {
+      this.getPoster(movie).then(
+        (movie) => {
+          this.navCtrl.push('film-details', {
+           'movie': movie
+          });
+        }
+      );
     });
   }
 }

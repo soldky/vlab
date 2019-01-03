@@ -8,6 +8,7 @@ export abstract class Medias {
   protected year: string;
   protected page: number;
   protected nbOfPage: number;
+  protected nbOfResult: number;
 
   protected constructor(public apiOmdb: OmdbLinkProvider) {}
 
@@ -16,12 +17,31 @@ export abstract class Medias {
     this.page = 1;
     this.apiOmdb.getMediasToAPI(this.type, this.title, this.year, this.page).then(data => {
       if(data["Search"]) {
-        console.log(data);
         for (let media of data["Search"]) {
-          this.medias.push(media);
+          if(media.imdbID) {
+            this.getPoster(media).then(
+              (media) => {
+                this.medias.push(media);
+                this.medias.sort(this.sort);
+              }
+            );
+          }
         }
-        this.nbOfPage = Math.trunc(data["totalResults"] / 10 + 1);
+        this.nbOfResult = data["totalResults"];
+        this.nbOfPage = Math.trunc(this.nbOfResult / 10 + 1);
       }
+    });
+  }
+
+  public getPoster(media) {
+    return new Promise((resolve) => {
+      this.apiOmdb.getPosterToApi(media.imdbID)
+        .catch((e) => {
+          if (e.status === 200) {
+            media.Poster = e.url;
+          }
+          resolve(media);
+        });
     });
   }
 
@@ -29,7 +49,13 @@ export abstract class Medias {
     this.apiOmdb.getMediasToAPI(this.type, this.title, this.year, this.page).then(data => {
       if(data["Search"]) {
         for (let media of data["Search"]) {
-          this.medias.push(media);
+          if(media.imdbID) {
+            this.getPoster(media).then(
+              (media) => {
+                this.medias.push(media);
+              }
+            );
+          }
         }
       }
     }).catch(e => {
@@ -40,6 +66,16 @@ export abstract class Medias {
   public newPage() {
     this.page++;
     this.addMedias();
+  }
+
+  public sort(a, b) {
+    if(a.Year > b.Year) {
+      return -1;
+    }
+    else if(a.Year < b.Year) {
+      return 1;
+    }
+    return 0;
   }
 
   doInfinite(infiniteScroll) {

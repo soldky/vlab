@@ -7,13 +7,18 @@
 
 <ion-content>
   <ion-list>
+    <span id="nbOfResult">
+      <p *ngIf="medias.length > 0">Nombre de résultats : {{ nbOfResult }}</p>
+    </span>
     <ion-card *ngFor="let film of medias">
-      <ion-card-header>
-        <h2>{{ film.Title }}</h2>
-        <p>{{ film.Year }}</p>
-      </ion-card-header>
-      <ion-card-content (click)="filmsDetails(film.Title);">
+      <ion-card-content (click)="filmsDetails(film);">
         <img src="{{ film.Poster }}" alt="{{ film.Title }}">
+        <div class="content">
+          <div class="info">
+            <h2>{{ film.Title }}</h2>
+            <p>({{ film.Year }})</p>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
 

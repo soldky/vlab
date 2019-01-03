@@ -1,3 +1,37 @@
 page-film-details {
+  .content {
+    h2 {
+      font-size: 1.4em;
+      text-align: center;
+      span {
+        font-style: italic;
+        font-size: .8em;
+      }
+    }
 
+    .poster, .details {
+      width: 100%;
+    }
+
+    .poster {
+      img {
+        display: block;
+        width: 75%;
+        height: auto;
+        margin: auto;
+      }
+    }
+
+    .details {
+      margin-top: 10px;
+
+      p {
+        padding: 0 20px 0 20px;
+      }
+
+      span {
+        color: #005ea8;
+      }
+    }
+  }
 }
