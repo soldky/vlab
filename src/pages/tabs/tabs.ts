@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { FilmsPage } from './../films/films';
-import { SeriesPage } from './../series/series';
+import { IonicPage } from 'ionic-angular';
+import { FilmsPage } from '../films/films';
+import { SeriesPage } from '../series/series';
 
 @IonicPage()
 @Component({
@@ -10,6 +10,6 @@ import { SeriesPage } from './../series/series';
 })
 
 export class TabsPage {
- filmsPage = FilmsPage;
- seriesPage = SeriesPage;
+  filmsPage = FilmsPage;
+  seriesPage = SeriesPage;
 }

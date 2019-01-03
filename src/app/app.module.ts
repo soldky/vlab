@@ -28,7 +28,7 @@ import { SeriesPage } from '../pages/series/series';
     MyApp,
     TabsPage,
     FilmsPage,
-    SeriesPage
+    SeriesPage,
   ],
   providers: [
     StatusBar,

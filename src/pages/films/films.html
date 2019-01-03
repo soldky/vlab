@@ -1,12 +1,27 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Films</ion-title>
+    <ion-searchbar [(ngModel)]="title" (ionInput)="getMedias();" placeholder="Recherche"></ion-searchbar>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let film of medias">
+      <ion-card-header>
+        <h2>{{ film.Title }}</h2>
+        <p>{{ film.Year }}</p>
+      </ion-card-header>
+      <ion-card-content (click)="filmsDetails(film.Title);">
+        <img src="{{ film.Poster }}" alt="{{ film.Title }}">
+      </ion-card-content>
+    </ion-card>
 
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="ios"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
 </ion-content>
+
+
+

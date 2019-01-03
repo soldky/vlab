@@ -19,8 +19,8 @@ export class OmdbLinkProvider {
 
   constructor(public http: HttpClient) {}
 
-  public getFilms(title: string, year: string, page: number) {
-    return this.http.get(this.URL_OMDB + "&s=" + title + "&y=" + year + "&page=" + page.toString()).toPromise();
+  public getMediasToAPI(type: string, title: string, year: string, page: number) {
+    return this.http.get(this.URL_OMDB + "&type=" + type + "&s=" + title + "&y=" + year + "&page=" + page.toString()).toPromise();
   };
 
 }

@@ -1,12 +1,24 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Series</ion-title>
+    <ion-searchbar [(ngModel)]="title" (ionInput)="getMedias();" placeholder="Recherche"></ion-searchbar>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let serie of medias">
+      <ion-card-header>
+        <h2>{{ serie.Title }}</h2>
+        <p>{{ serie.Year }}</p>
+      </ion-card-header>
+      <ion-card-content>
+        <img src="{{ serie.Poster }}" alt="{{ serie.Title }}">
+      </ion-card-content>
+    </ion-card>
 
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="ios" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
 </ion-content>

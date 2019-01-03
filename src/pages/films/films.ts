@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the FilmsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Medias } from "../../models/medias";
+import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 
 @IonicPage()
 @Component({
   selector: 'page-films',
-  templateUrl: 'films.html',
+  templateUrl: 'films.html'
 })
-export class FilmsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class FilmsPage extends Medias {
+  public type: string = "movie";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
+    super(apiOmdb);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FilmsPage');
+  public filmsDetails(title: string) {
+    this.navCtrl.push('film-details', {
+      'title': title
+    });
   }
-
 }
