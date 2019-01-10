@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Medias } from "../../models/medias";
 import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
+import { StorageProvider } from "../../providers/storage/storage";
 
 @IonicPage()
 @Component({
@@ -12,14 +13,13 @@ import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 export class FilmsPage extends Medias {
   public type: string = "movie";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
-    super(apiOmdb);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider, public storage: StorageProvider) {
+    super(apiOmdb, storage);
   }
 
   public filmsDetails(movie) {
     new Promise((resolve) => {
       this.apiOmdb.getMediasDetailToAPI(movie.imdbID).then(data => {
-        console.log(data);
         if(data) {
           resolve(data);
         }

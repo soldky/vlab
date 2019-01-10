@@ -17,6 +17,7 @@ page-series {
   }
 
   ion-card-content {
+    cursor: pointer;
     position: relative;
     img {
       margin: 10% auto 10%;
@@ -51,6 +52,15 @@ page-series {
           color: #fff;
           text-align: center;
         }
+      }
+
+      ion-icon {
+        color: yellow;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 30px;
+        cursor: pointer;
       }
     }
   }

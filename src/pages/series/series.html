@@ -14,6 +14,8 @@
       <ion-card-content (click)="seriesDetails(serie);">
         <img src="{{ serie.Poster }}" alt="{{ serie.Title }}">
         <div class="content">
+          <ion-icon title="Ajouter aux favoris" name="star-outline" (click)="addFavories(serie); $event.stopPropagation();" *ngIf="!serie['starType']"></ion-icon>
+          <ion-icon title="Ajouter aux favoris" name="star" (click)="removeFavories(serie); $event.stopPropagation();" *ngIf="serie['starType']"></ion-icon>
           <div class="info">
             <h2>{{ serie.Title }}</h2>
             <p>({{ serie.Year }})</p>

@@ -18,6 +18,7 @@ page-films {
 
   ion-card-content {
     position: relative;
+    cursor: pointer;
     img {
       margin: 10% auto 10%;
       width: 85%;
@@ -51,6 +52,15 @@ page-films {
           color: #fff;
           text-align: center;
         }
+      }
+
+      ion-icon {
+        color: yellow;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 30px;
+        cursor: pointer;
       }
     }
   }

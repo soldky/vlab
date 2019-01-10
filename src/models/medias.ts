@@ -1,4 +1,5 @@
 import { OmdbLinkProvider } from "../providers/omdb-link/omdb-link";
+import { StorageProvider } from "../providers/storage/storage";
 
 export abstract class Medias {
 
@@ -10,7 +11,7 @@ export abstract class Medias {
   protected nbOfPage: number;
   protected nbOfResult: number;
 
-  protected constructor(public apiOmdb: OmdbLinkProvider) {}
+  protected constructor(public apiOmdb: OmdbLinkProvider, public storage: StorageProvider) {}
 
   public getMedias() {
     this.medias = [];
@@ -21,8 +22,15 @@ export abstract class Medias {
           if(media.imdbID) {
             this.getPoster(media).then(
               (media) => {
-                this.medias.push(media);
-                this.medias.sort(this.sort);
+                this.storage.checkInKey("favories", media["imdbID"]).then (
+                  (inArray) => {
+                    if(inArray) {
+                      media["starType"] = true;
+                    }
+                    this.medias.push(media);
+                    this.medias.sort(this.sort);
+                  }
+                );
               }
             );
           }
@@ -79,6 +87,19 @@ export abstract class Medias {
       return 1;
     }
     return 0;
+  }
+
+  public addFavories(media) {
+    this.storage.saveInArray("favories", media.imdbID).then(() => {
+        media["starType"] = true;
+      }
+    );
+  }
+
+  public removeFavories(media) {
+    this.storage.removeInArray("favories", media.imdbID).then(() => {
+        media["starType"] = false;
+    });
   }
 
   doInfinite(infiniteScroll) {

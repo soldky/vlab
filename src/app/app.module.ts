@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -11,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilmsPage } from '../pages/films/films';
 import { SeriesPage } from '../pages/series/series';
 import { FavoriesPage } from '../pages/favories/favories';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { FavoriesPage } from '../pages/favories/favories';
   imports: [
     HttpClientModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +40,8 @@ import { FavoriesPage } from '../pages/favories/favories';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    OmdbLinkProvider
+    OmdbLinkProvider,
+    StorageProvider
   ]
 })
 export class AppModule {}
