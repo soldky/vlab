@@ -15,18 +15,21 @@
 
 <ion-content padding>
   <div class="content">
-    <h2>{{ movie.Title }} - <span>({{ movie.Year }})</span></h2>
     <div class="poster">
       <img src="{{ movie.Poster }}">
     </div>
     <div class="details">
-      <p>Genre : <span>{{ movie.Genre }}</span></p>
-      <p>Acteur : <span>{{ movie.Actors }}</span></p>
-      <p>Producteur : <span>{{ movie.Production }}</span></p>
-      <p>Durée : <span>{{ movie.Runtime }}</span></p>
-      <p>Nationalité : <span>{{ movie.Country }}</span></p>
+      <p><span class="title">Année : </span><span>{{ movie.Year }}</span></p>
+      <p><span class="title">Genre : </span><span>{{ movie.Genre }}</span></p>
+      <p><span class="title">Acteur : </span><span>{{ movie.Actors }}</span></p>
+      <p><span class="title">Producteur : </span><span>{{ movie.Director }}</span></p>
+      <p><span class="title">Durée : </span><span>{{ movie.Runtime }}</span></p>
+      <p><span class="title">Nationalité : </span><span>{{ movie.Country }}</span></p>
+      <p><span class="title">Recommendation : </span><span>{{ movie.Rated }}</span></p>
+      <p><span class="title">Récompenses : </span><span>{{ movie.Awards }}</span></p>
+      <p><span class="title">Site : </span><span><a href="{{ movie.Website }}">{{ movie.Website }}</a></span></p>
       <h3>Synospis</h3>
-      <p>{{ movie.Plot }}</p>
+      <p class="plot">{{ movie.Plot }}</p>
     </div>
   </div>
 </ion-content>

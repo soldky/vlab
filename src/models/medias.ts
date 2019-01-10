@@ -40,6 +40,9 @@ export abstract class Medias {
           if (e.status === 200) {
             media.Poster = e.url;
           }
+          else if(e.status === 404 && media.Poster === "N/A") {
+            media.Poster = "https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg";
+          }
           resolve(media);
         });
     });

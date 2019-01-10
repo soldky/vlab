@@ -1,0 +1,42 @@
+<!--
+  Generated template for the SerieSeasonsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ serie.Title }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="content">
+    <div class="poster">
+      <img src="{{ serie.Poster }}">
+    </div>
+    <div class="details">
+      <p><span class="title">Genre : </span><span>{{ serie.Genre }}</span></p>
+      <p><span class="title">Acteur : </span><span>{{ serie.Actors }}</span></p>
+      <p><span class="title">Durée moyenne : </span><span>{{ serie.Runtime }}</span></p>
+      <p><span class="title">Nombre de saisons : </span><span>{{ serie.totalSeasons.length }}</span></p>
+      <p><span class="title">Nationalité : </span><span>{{ serie.Country }}</span></p>
+      <p><span class="title">Recommendation : </span><span>{{ serie.Rated }}</span></p>
+      <p><span class="title">Récompenses : </span><span>{{ serie.Awards }}</span></p>
+      <ion-list>
+        <p>
+          <span class="title">Voir une saison :</span>
+          <br />
+          <button ion-item *ngFor="let season of serie.totalSeasons" (click)="seasonDetails(season)">
+            Saison {{ season }}
+          </button>
+        </p>
+      </ion-list>
+      <h3>Synospis</h3>
+      <p class="plot">{{ serie.Plot }}</p>
+    </div>
+  </div>
+</ion-content>

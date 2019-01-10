@@ -33,4 +33,8 @@ export class OmdbLinkProvider {
     return this.http.get(this.URL_POSTER + "&i=" + id).toPromise();
   }
 
+  public getSeasonDetails(id: string, season: number) {
+    return this.http.get(this.URL_WITHOUT_ID + "&i=" + id + "&plot=full&Season=" + season.toString()).toPromise();
+  }
+
 }

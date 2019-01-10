@@ -11,7 +11,7 @@ import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 
 @IonicPage({
   name: 'film-details',
-  segment: 'film/:titlz',
+  segment: 'film/:title',
   defaultHistory: ['list']
 })
 @Component({
@@ -20,12 +20,11 @@ import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 })
 export class FilmDetailsPage {
 
-  protected movie = null;
+  protected movie;
   protected genres: string[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
     this.movie = this.navParams.get('movie');
-    console.log(this.movie);
   }
 
 }

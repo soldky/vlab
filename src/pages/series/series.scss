@@ -1,3 +1,58 @@
 page-series {
 
+  #nbOfResult {
+    p {
+      font-style: italic;
+      padding-left: 20px;
+    }
+  }
+
+  .card-md, .card-ios, .card-wp {
+    margin: 0;
+    width: 100%;
+  }
+
+  .card-content-md, .card-content-ios, .card-content-wp {
+    padding: 0;
+  }
+
+  ion-card-content {
+    position: relative;
+    img {
+      margin: 10% auto 10%;
+      width: 85%;
+      height: auto;
+      position: relative;
+    }
+
+    .content {
+      position: absolute;
+      top: 0;
+      left: 7.5%;
+      content: "";
+      display: block;
+      width: 85%;
+      margin: auto;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgb(0,0,0) 100%);
+      z-index: 2;
+
+      .info {
+        position: absolute;
+        width: 100%;
+        top: 75%;
+        padding: 0 10px 0 10px;
+        h2 {
+          text-align: center;
+          color: #fff;
+          font-size: 1.5em;
+        }
+        p {
+          color: #fff;
+          text-align: center;
+        }
+      }
+    }
+  }
+
 }

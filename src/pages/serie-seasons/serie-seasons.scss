@@ -1,4 +1,4 @@
-page-film-details {
+page-serie-seasons {
   .content {
     h2 {
       font-size: 1.4em;
@@ -24,14 +24,25 @@ page-film-details {
       span {
         color: #005ea8;
       }
-
+      
       .title {
         font-size: 1.1em;
         color: #000;
       }
 
       .plot {
-        color: #000 !important;
+        color: #000;
+      }
+
+      ion-list {
+        ion-item {
+          width: 80%;
+          color: #005ea8;
+          padding: 0;
+        }
+        .label {
+          font-size: .9em;
+        }
       }
     }
   }

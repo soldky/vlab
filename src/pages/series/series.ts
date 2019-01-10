@@ -15,4 +15,28 @@ export class SeriesPage extends Medias {
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
     super(apiOmdb);
   }
+
+  public seriesDetails(serie) {
+    new Promise((resolve) => {
+      this.apiOmdb.getMediasDetailToAPI(serie.imdbID).then(data => {
+        if (data) {
+          let seasons = [];
+          for (let i = 0; i < data["totalSeasons"]; i++) {
+            seasons[i] = i + 1;
+          }
+          data["totalSeasons"] = seasons;
+          resolve(data);
+        }
+      });
+    }).then(
+      (serie) => {
+        this.getPoster(serie).then(
+          (serie) => {
+            this.navCtrl.push('serie-seasons', {
+              'serie': serie
+            });
+          }
+        );
+      });
+  }
 }
