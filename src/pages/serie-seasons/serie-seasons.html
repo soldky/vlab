@@ -26,6 +26,10 @@
       <p><span class="title">Nationalité : </span><span>{{ serie.Country }}</span></p>
       <p><span class="title">Recommendation : </span><span>{{ serie.Rated }}</span></p>
       <p><span class="title">Récompenses : </span><span>{{ serie.Awards }}</span></p>
+      <p><span class="title">Note : </span></p>
+      <div *ngFor="let rating of serie.Ratings" class="rated">
+        <p>{{ rating.Source }} : <span>{{ rating.Value }}</span></p>
+      </div>
       <ion-list>
         <p>
           <span class="title">Voir une saison :</span>

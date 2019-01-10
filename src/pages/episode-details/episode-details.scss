@@ -1,4 +1,4 @@
-page-film-details {
+page-episode-details {
   .content {
     h2 {
       font-size: 1.4em;
@@ -9,19 +9,11 @@ page-film-details {
       }
     }
 
-    .poster, .details {
-      width: 100%;
-    }
-
     .details {
       margin-top: 10px;
 
       p {
         padding: 0 20px 0 20px;
-      }
-
-      span {
-        color: #005ea8;
       }
 
       .title {
@@ -30,7 +22,11 @@ page-film-details {
       }
 
       .plot {
-        color: #000 !important;
+        color: #000;
+      }
+
+      .details {
+        color: #005ea8;
       }
 
       .rated {
@@ -43,4 +39,5 @@ page-film-details {
       }
     }
   }
+
 }

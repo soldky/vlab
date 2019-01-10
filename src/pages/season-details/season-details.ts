@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 
 /**
  * Generated class for the SeasonDetailsPage page.
@@ -21,10 +22,21 @@ export class SeasonDetailsPage {
 
   protected season;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider) {
     this.season = this.navParams.get('season');
+  }
 
-    console.log(this.season);
+  public episodeDetails(episode) {
+    new Promise((resolve) => {
+      this.apiOmdb.getEpisodeDetails(episode.imdbID).then(data => {
+        resolve(data);
+      });
+    }).then(
+    (episode) => {
+      this.navCtrl.push('episode-details', {
+        'episode': episode
+      });
+    });
   }
 
 }

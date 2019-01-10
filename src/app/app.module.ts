@@ -10,13 +10,15 @@ import { OmdbLinkProvider } from '../providers/omdb-link/omdb-link';
 import { HttpClientModule } from '@angular/common/http';
 import { FilmsPage } from '../pages/films/films';
 import { SeriesPage } from '../pages/series/series';
+import { FavoriesPage } from '../pages/favories/favories';
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
     FilmsPage,
-    SeriesPage
+    SeriesPage,
+    FavoriesPage
   ],
   imports: [
     HttpClientModule,
@@ -29,6 +31,7 @@ import { SeriesPage } from '../pages/series/series';
     TabsPage,
     FilmsPage,
     SeriesPage,
+    FavoriesPage
   ],
   providers: [
     StatusBar,

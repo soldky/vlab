@@ -18,7 +18,6 @@ page-serie-seasons {
 
       p {
         padding: 0 20px 0 20px;
-        color: grey;
       }
 
       span {
@@ -32,6 +31,15 @@ page-serie-seasons {
 
       .plot {
         color: #000;
+      }
+
+      .rated {
+        p {
+          padding-left: 40px;
+        }
+        span {
+          color: #005ea8;
+        }
       }
 
       ion-list {

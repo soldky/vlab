@@ -16,7 +16,7 @@
 <ion-content padding>
   <h2>Liste épisode</h2>
   <ion-list>
-    <button ion-item *ngFor="let episode of season.Episodes">
+    <button ion-item *ngFor="let episode of season.Episodes" (click)="episodeDetails(episode)">
       {{ episode.Episode }} - {{ episode.Title }}
     </button>
   </ion-list>

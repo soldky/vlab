@@ -27,6 +27,10 @@
       <p><span class="title">Nationalité : </span><span>{{ movie.Country }}</span></p>
       <p><span class="title">Recommendation : </span><span>{{ movie.Rated }}</span></p>
       <p><span class="title">Récompenses : </span><span>{{ movie.Awards }}</span></p>
+      <p><span class="title">Note : </span></p>
+      <div *ngFor="let rating of movie.Ratings" class="rated">
+        <p>{{ rating.Source }} : <span>{{ rating.Value }}</span></p>
+      </div>
       <p><span class="title">Site : </span><span><a href="{{ movie.Website }}">{{ movie.Website }}</a></span></p>
       <h3>Synospis</h3>
       <p class="plot">{{ movie.Plot }}</p>
