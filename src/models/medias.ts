@@ -1,5 +1,7 @@
 import { OmdbLinkProvider } from "../providers/omdb-link/omdb-link";
 import { StorageProvider } from "../providers/storage/storage";
+import { PhotoLibrary } from '@ionic-native/photo-library';
+
 
 export abstract class Medias {
 
@@ -11,7 +13,7 @@ export abstract class Medias {
   protected nbOfPage: number;
   protected nbOfResult: number;
 
-  protected constructor(public apiOmdb: OmdbLinkProvider, public storage: StorageProvider) {}
+  protected constructor(public apiOmdb: OmdbLinkProvider, public storage: StorageProvider, public photoLibrary: PhotoLibrary) {}
 
   public getMedias() {
     this.medias = [];
@@ -39,6 +41,18 @@ export abstract class Medias {
         this.nbOfPage = Math.trunc(this.nbOfResult / 10 + 1);
       }
     });
+  }
+
+  public downloadPoster(url) {
+    (<any>window).cordova.plugins.imagesaver.saveImageToGallery(url + "&ext=.jpg", onSaveImageSuccess, onSaveImageError);
+
+    function onSaveImageSuccess() {
+        console.log('--------------success');
+    }
+
+    function onSaveImageError(error) {
+        console.log('--------------error: ' + error);
+    }
   }
 
   public getPoster(media) {

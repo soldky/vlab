@@ -8,6 +8,15 @@
 
   <ion-navbar>
     <ion-title>Favories</ion-title>
+
+    <div class="left-right">
+      <ion-icon name="more"></ion-icon>
+      <ion-select #select (ionChange)="exportImport(select.value)">
+        <ion-option value="1">Export en JSON</ion-option>
+        <!--<ion-option value="2">Export en CSV</ion-option>-->
+        <ion-option value="3">Import JSON</ion-option>
+      </ion-select>
+    </div>
   </ion-navbar>
 
 </ion-header>
@@ -15,6 +24,7 @@
 
 <ion-content padding>
   <p *ngIf="favories.length === 0">Aucun favori enregistré</p>
+
   <div *ngFor="let favorite of favories" class="favorite">
     <button ion-item (click)="favoriteDetails(favorite)">
       {{ favorite.Title }}

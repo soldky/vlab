@@ -13,6 +13,9 @@ import { FilmsPage } from '../pages/films/films';
 import { SeriesPage } from '../pages/series/series';
 import { FavoriesPage } from '../pages/favories/favories';
 import { StorageProvider } from '../providers/storage/storage';
+import { File } from '@ionic-native/file';
+import { PhotoLibrary } from '@ionic-native/photo-library';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { StorageProvider } from '../providers/storage/storage';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     OmdbLinkProvider,
-    StorageProvider
+    StorageProvider,
+    File,
+    PhotoLibrary
   ]
 })
 export class AppModule {}

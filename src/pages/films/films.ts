@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Medias } from "../../models/medias";
 import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
 import { StorageProvider } from "../../providers/storage/storage";
+import { PhotoLibrary } from '@ionic-native/photo-library';
 
 @IonicPage()
 @Component({
@@ -13,8 +14,8 @@ import { StorageProvider } from "../../providers/storage/storage";
 export class FilmsPage extends Medias {
   public type: string = "movie";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider, public storage: StorageProvider) {
-    super(apiOmdb, storage);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiOmdb: OmdbLinkProvider, public storage: StorageProvider, public photoLibrary: PhotoLibrary) {
+    super(apiOmdb, storage, photoLibrary);
   }
 
   public filmsDetails(movie) {

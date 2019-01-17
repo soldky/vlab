@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from "../../providers/storage/storage";
 import { OmdbLinkProvider } from "../../providers/omdb-link/omdb-link";
+import { File } from '@ionic-native/file';
+//import * as json2csv from 'json-2-csv';
 
 /**
  * Generated class for the FavoriesPage page.
@@ -19,17 +21,19 @@ export class FavoriesPage {
 
   protected favories: Object[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public apiOmdb: OmdbLinkProvider) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public apiOmdb: OmdbLinkProvider, public file: File) {}
 
   public ionViewWillEnter() {
     this.favories = [];
     this.storage.get("favories").then((favories) => {
-      favories.forEach((favorite) => {
-        this.apiOmdb.getMediasDetailToAPI(favorite).then((media) => {
-          this.favories.push(media);
-          this.favories.sort(this.sort);
+      if(favories != null) {
+        favories.forEach((favorite) => {
+          this.apiOmdb.getMediasDetailToAPI(favorite).then((media) => {
+            this.favories.push(media);
+            this.favories.sort(this.sort);
+          });
         });
-      });
+      };
     });
   }
 
@@ -60,12 +64,80 @@ export class FavoriesPage {
     this.storage.removeInArray("favories", favorite.imdbID).then(
       () => {
         for(let i = 0; i < this.favories.length; i++) {
-          if(this.favories[i]["imdbID"] === favorite.imdbID) {
-            console.log("22");
             this.favories.splice(i, 1);
-          }
         }
       });
+  }
+
+  public exportImport(action: string) {
+    if(action === '1') {
+      this.file.writeFile(this.file.externalDataDirectory, "favoriesJSON.json", JSON.stringify(this.favories), {replace:true}).then(
+        (result) => {
+          console.log(JSON.stringify(result));
+          alert("Favoris exporté dans le fichier " + this.file.dataDirectory + "favoriesJSON.json");
+        },
+        (e) => {
+          console.log(JSON.stringify(e));
+          this.file.writeFile(this.file.dataDirectory, "favoriesJSON.json", JSON.stringify(this.favories), {replace:true}).then(
+            (result) => {
+            console.log(JSON.stringify(result));
+            alert("Favoris exporté dans le fichier " + this.file.dataDirectory + "favoriesJSON.json");
+          })
+        }
+      );
+    }
+
+    /*else if(action === '2') {
+      let json2csvCallback = function(err, csv) {
+        let file: File;
+        this.test(csv);
+      }
+
+      json2csv.json2csv(this.favories, json2csvCallback);
+    }*/
+
+    else if(action === '3') {
+      let importFavories;
+
+      this.file.readAsText(this.file.externalDataDirectory, "favoriesJSON.json").then(
+        (data) => {
+          importFavories = JSON.parse(data);
+
+          this.storage.purge().then(
+            () => {
+              let save = [];
+              for(let i = 0; i < importFavories.length; i++) {
+                save.push(importFavories[i].imdbID);
+              };
+              this.storage.set("favories", save).then(
+                () => console.log("save ok")
+              );
+            })
+          this.favories = importFavories;
+          alert("Favoris importés");
+        },
+        (e) => {
+          this.file.readAsText(this.file.dataDirectory, "favoriesJSON.json").then(
+            (data) => {
+              importFavories = JSON.parse(data);
+
+              this.storage.purge().then(
+                () => {
+                  let save = [];
+                  for(let j = 0; j < importFavories.length; j++) {
+                    save.push(importFavories[j].imdbID);
+                  };
+                  this.storage.set("favories", save).then(
+                    () => console.log("save ok")
+                  );
+                })
+              this.favories = importFavories;
+              alert("Favoris importés");
+            }
+          );
+        }
+      );
+    }
   }
 
   private sort(a, b) {

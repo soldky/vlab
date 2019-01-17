@@ -47,17 +47,25 @@ export class StorageProvider {
   public checkInKey(key: string, id: string) {
     return new Promise((resolve, reject) => {
       this.get(key).then((val) => {
-        if (val.indexOf(id) < 0) {
-          resolve(false);
-        }
-        else {
-          resolve(true);
+        if(val != null) {
+          if (val.indexOf(id) < 0) {
+            resolve(false);
+          }
+          else {
+            resolve(true);
+          }
         }
       });
     })
   }
 
-  private set(key, value) {
+  public purge() {
+    return new Promise((resolve) => {
+      resolve(this.set("favories", []));
+    });
+  }
+
+  public set(key, value) {
     return this.storage.set(key, value);
   }
 

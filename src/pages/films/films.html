@@ -16,6 +16,7 @@
         <div class="content">
           <ion-icon title="Ajouter aux favoris" name="star-outline" (click)="addFavories(film); $event.stopPropagation();" *ngIf="!film['starType']"></ion-icon>
           <ion-icon title="Ajouter aux favoris" name="star" (click)="removeFavories(film); $event.stopPropagation();" *ngIf="film['starType']"></ion-icon>
+          <ion-icon title="Télécharger le poster" class="download" name="download" (click)="downloadPoster(film.Poster); $event.stopPropagation();"></ion-icon>
           <div class="info">
             <h2>{{ film.Title }}</h2>
             <p>({{ film.Year }})</p>
